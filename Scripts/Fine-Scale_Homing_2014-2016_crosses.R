@@ -173,7 +173,7 @@ dam_sire_glm<-model_data %>% ggplot(aes(y=distance_mouth_sire,x=distance_mouth_d
   geom_abline(slope=1,lty = 2)+
   guides(colour = guide_legend(override.aes = list(alpha=1)))+
   geom_ribbon(data=DS_distance_pred,
-              aes(x=distance_mouth_dam,ymin=distance_mouth_sire-se.fit,ymax=distance_mouth_sire+se.fit,
+              aes(x=distance_mouth_dam,ymin=distance_mouth_sire-(1.96*se.fit),ymax=distance_mouth_sire+(1.96*se.fit),
                   fill=stream_off,color=stream_off),inherit.aes=F,alpha=0.3)+
   geom_line(data=DS_distance_pred,aes(color=stream_off))+
   theme_classic()+

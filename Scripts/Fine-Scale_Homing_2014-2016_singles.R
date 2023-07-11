@@ -63,19 +63,22 @@ model_data_long <- model_data %>%
 # Create a single plot with facets
 collections_plot <- model_data_long %>%
   ggplot(aes(x = stream_off, y = distance_mouth, fill = stream_off)) +
-  geom_jitter(aes(color = stream_off), alpha = 0.3, size = 0.75, show.legend = FALSE, height = 0) +
+  geom_jitter(aes(color = stream_off), alpha = 0.3, size = 0.4, show.legend = FALSE, height = 0) +
   scale_fill_discrete(type = colorz)+
   scale_color_discrete(type = colorz)+
-  scale_y_continuous(breaks = c(0,100,500,1000,1500,2000)) +
+  scale_y_continuous(breaks = c(0,100,500,1000,1500,2000),limits = c(0,1500)) +
   theme_classic() +
   geom_segment(data = high_tide_line, 
                aes(y = htide,yend = htide,x=c(1,2,3,4,1,2,3,4) - 0.50,xend = c(1,2,3,4,1,2,3,4)+0.50),
                lty=2, lwd = 1, color="black") +
-  labs(y = "Sampling Locations", x = "Stream", color = "Stream", fill = "Stream") +
+  labs(y = "Sampling Locations (river meters)", x = "Stream", color = "Stream", fill = "Stream") +
   facet_wrap(~Year)
 
 collections_plot
 #5 x 5.5 ish
+
+ggsave(filename = "../Figures/Collections_Fig1.png",
+       plot = collections_plot,dpi = 300,width = 5, height = 2.5, units = "in")
 
 library(patchwork)
 
@@ -248,7 +251,7 @@ for(i in 1:nrow(distance_AIC)) distance_AIC$Model[i]<- as.character(formula(get.
 #Parent-Offspring regression best fit line:
 distance_pred<-as.data.frame(model_data %>% group_by(stream_off) %>% 
                                dplyr::summarise(distance_mouth_par = seq(min(distance_mouth_par),max(distance_mouth_par),length.out=1000),
-                                                DOY_off = seq(min(DOY_off),max(DOY_off),length.out = 1000),
+                                                DOY_off = mean(DOY_off),
                                                 sex_off = "Male"))
 distance_pred$distance_mouth_off <- predict(best_distance,newdata = distance_pred)
 distance_pred$se.fit <- predict(best_distance,newdata = distance_pred,se.fit = T)$se.fit
@@ -265,12 +268,12 @@ par_off_glm<-distance_pred %>%
                lwd=1.2,show.legend = F)+
   coord_cartesian(ylim = c(-20, 750),xlim=c(-100,1200), clip="on") +
   
-  #geom_jitter(data=model_data,aes(y=distance_mouth_off,x=distance_mouth_par,
-  #                                color=stream_off),
-  #            pch=16,alpha = 0.3,width = 10,height=10,size=0.8)+
+  geom_jitter(data=model_data,aes(y=distance_mouth_off,x=distance_mouth_par,
+                                  color=stream_off),
+              pch=16,alpha = 0.3,width = 10,height=10,size=0.3)+
   guides(colour = guide_legend(override.aes = list(alpha=1,size=2)))+
   
-  geom_ribbon(aes(ymin=distance_mouth_off-se.fit,ymax=distance_mouth_off+se.fit,color = stream_off,fill=stream_off),alpha=0.3,show.legend = F)+
+  geom_ribbon(aes(ymin=distance_mouth_off-(1.96*se.fit),ymax=distance_mouth_off+(1.96*se.fit),color = stream_off,fill=stream_off),alpha=0.3,show.legend = F)+
   geom_line(lwd=0.8,aes(color=stream_off),show.legend = F)+
   geom_abline(slope=1,intercept=0,lty=2,lwd=0.5)+
   scale_color_discrete(type = colorz)+
@@ -336,8 +339,8 @@ IU_pred$intertidal_par$data %>%
 
 ####Stream-specific:
 #Intertidal/Upstream Binomial model:
-global_IU<-glmer(intertidal_off~intertidal_par+
-                   sex_off+DOY_off+length_off+(1|stream_off),
+global_IU<-glm(intertidal_off~intertidal_par*stream_off+
+                   sex_off+DOY_off+length_off,
                  data=model_data,family = "binomial",
                  na.action=na.fail)
 summary(global_IU)
@@ -345,7 +348,7 @@ summary(global_IU)
 IU_dredge<-dredge(global_IU)
 
 
-IU_AIC<-as.data.frame(IU_dredge)[6:10]
+IU_AIC<-as.data.frame(IU_dredge)[8:12]
 IU_AIC[,2:5]<-round(IU_AIC[,2:5],2)
 colnames(IU_AIC)[1]<-"K"
 IU_AIC$Model<-rownames(IU_AIC)
@@ -353,20 +356,33 @@ for(i in 1:nrow(IU_AIC)) IU_AIC$Model[i]<- as.character(formula(get.models(IU_dr
 #write.csv(IU_AIC,"../Figures/Intertidal_Upstream_AIC_table.csv")
 
 
-best_fit_IU<-glmer(intertidal_off~intertidal_par+
-                     sex_off+DOY_off+(1|stream_off),
+best_fit_IU<-glm(intertidal_off~intertidal_par*stream_off+
+                     sex_off+DOY_off,
                    data=model_data,family = "binomial",
                    na.action=na.fail)
 summary(best_fit_IU)
 
-IU_pred<-plot_model(best_fit_IU,type="pred")
-IU_pred$intertidal_par$data$x<-c("Intertidal","Upstream")
-IU_pred$intertidal_par$data %>% 
-  ggplot(aes(y=predicted,x=x))+
-  geom_point()+
-  geom_errorbar(aes(ymin=conf.low,ymax=conf.high),width=0.2)+
-  labs(y="Proportion Spawning Upstream",x="Inferred Natal Rearing Location")+
-  theme_classic()
+IU_pred<-model_data %>% group_by(stream_off,intertidal_par) %>% 
+  dplyr::summarize(DOY_off=mean(DOY_off)) %>% 
+  mutate(intertidal_par = factor(intertidal_par))
+IU_pred$sex_off <- "Male"
+IU_pred$intertidal_off<-predict(best_fit_IU,newdata = IU_pred,type = "re")
+IU_pred$se.fit<-predict(best_fit_IU,newdata = IU_pred,type = "re",se.fit=T)$se.fit
+
+
+IU_pred_plot<-IU_pred%>% 
+  ggplot(aes(x=intertidal_par,y=intertidal_off,color=stream_off))+
+  geom_point(size=2)+
+  geom_errorbar(aes(ymin=intertidal_off-(se.fit*1.96),ymax=intertidal_off+(se.fit*1.96)),width=0.2)+
+  labs(y="Proportion Spawning\nUpstream",x="Inferred Natal Rearing Location")+
+  scale_color_discrete(type = colorz)+
+  theme_classic()+
+  facet_grid(.~stream_off)+
+  theme(legend.position = "none",
+        strip.text = element_blank(),strip.background = element_blank())
+
+ggarrange(par_off_boxplot,par_off_glm,IU_pred_plot,nrow=3,heights=c(1,1,1),align = "v")
+
 
 ###Split by just intertidal or upstream fish:
 model_data_upstream <- model_data %>% filter(intertidal_off=="Upstream")
@@ -440,7 +456,408 @@ distance_intertidal_AIC$Model<-rownames(distance_intertidal_AIC)
 for(i in 1:nrow(distance_intertidal_AIC)) distance_intertidal_AIC$Model[i]<- as.character(formula(get.models(distance_dredge_intertidal,subset = T)[[i]]))[3]
 #write.csv(distance_intertidal_AIC,"../Figures/distance_intertidal_AIC_table.csv")
 
+###Stream-Specific:
 
+model_data_upstream <- model_data %>% filter(intertidal_off=="Upstream")
+global_distance_upstream<-lm(distance_mouth_off~distance_mouth_par*stream_off+
+                                 sex_off+DOY_off+length_off,
+                               data=model_data_upstream,na.action=na.fail)
+
+distance_dredge_upstream<-dredge(global_distance_upstream)
+
+best_distance_upstream <- lm(distance_mouth_off~distance_mouth_par*stream_off+
+                                 length_off,
+                               data=model_data_upstream,na.action=na.fail)
+
+
+
+
+model_data_intertidal <- model_data %>% filter(intertidal_par=="Intertidal")
+global_distance_intertidal<-lm(distance_mouth_off~distance_mouth_par*stream_off +
+                                   sex_off+DOY_off+length_off,
+                                 data=model_data_intertidal,na.action=na.fail)
+
+distance_dredge_intertidal<-dredge(global_distance_intertidal)
+
+best_distance_intertidal <- lm(distance_mouth_off~distance_mouth_par*stream_off +
+                                 sex_off+DOY_off,
+                               data=model_data_intertidal,na.action=na.fail)
+  
+summary(best_distance_intertidal)
+
+
+
+distance_pred_upstream<-as.data.frame(model_data_upstream %>% group_by(stream_off) %>% 
+                                        dplyr::summarise(distance_mouth_par = seq(min(distance_mouth_par),max(distance_mouth_par),length.out=1000),
+                                                         DOY_off = mean(DOY_off),
+                                                         length_off = mean(length_off),
+                                                         sex_off = "Male",
+                                                         zone = "Upstream"))
+distance_pred_upstream$distance_mouth_off <- predict(best_distance_upstream,newdata = distance_pred_upstream)
+distance_pred_upstream$se.fit <- predict(best_distance_upstream,newdata = distance_pred_upstream,se.fit = T)$se.fit
+
+
+distance_pred_intertidal<-as.data.frame(model_data_intertidal %>% group_by(stream_off) %>% 
+                                        dplyr::summarise(distance_mouth_par = seq(min(distance_mouth_par),max(distance_mouth_par),length.out=1000),
+                                                         DOY_off = mean(DOY_off),
+                                                         length_off = mean(length_off),
+                                                         sex_off = "Male",
+                                                         zone = "Intertidal"))
+distance_pred_intertidal$distance_mouth_off <- predict(best_distance_intertidal,newdata = distance_pred_intertidal)
+distance_pred_intertidal$se.fit <- predict(best_distance_intertidal,newdata = distance_pred_intertidal,se.fit = T)$se.fit
+
+distance_pred<-rbind(distance_pred_intertidal,distance_pred_upstream)
+distance_pred<-distance_pred %>% left_join(high_tide_line,by="stream_off")%>% 
+  filter((distance_mouth_par <= htide & zone == "Intertidal") | 
+           (distance_mouth_par > htide & zone == "Upstream"))
+
+
+high_tide_line<-PWS_single_data %>% group_by(stream_off) %>% dplyr::summarize(htide=min(unique(high_tide_off)))
+model_data <- left_join(model_data, high_tide_line, by = "stream_off") %>% 
+  mutate(zone = ifelse(distance_mouth_par <= htide, "Intertidal", "Upstream"))
+
+
+IU_separate_plot<-distance_pred %>% 
+  ggplot(aes(y=distance_mouth_off,x=distance_mouth_par,color=stream_off))+
+  #geom_vline(data=high_tide_line,aes(xintercept=htide,color=stream_off),show.legend = F,lty=2,lwd=0.8)+
+  
+  #geom_segment(data=high_tide_line,aes(x=htide,y=-100,xend=htide,yend=-20,color=stream_off),
+  #             lwd=1.2,show.legend = F)+
+  #geom_segment(data=high_tide_line,aes(x=-175,xend=-20, y=htide,yend=htide,color=stream_off),
+  #             lwd=1.2,show.legend = F)+
+  #coord_cartesian(ylim = c(-20, 750),xlim=c(-100,1200), clip="on") +
+  
+  geom_jitter(data=model_data,aes(y=distance_mouth_off,x=distance_mouth_par,
+                                  color=stream_off),
+              pch=16,alpha = 0.3,width = 10,height=10,size=0.3)+
+  guides(colour = guide_legend(override.aes = list(alpha=1,size=2)))+
+  
+  geom_ribbon(aes(ymin=distance_mouth_off-1.96*se.fit,ymax=distance_mouth_off+1.96*se.fit,
+                  color = stream_off,fill=stream_off,
+                  group = zone),alpha=0.3,show.legend = F)+
+  geom_line(lwd=0.8,aes(color=stream_off,group = zone),show.legend = F)+
+  geom_abline(slope=1,intercept=0,lty=2,lwd=0.5)+
+  scale_color_discrete(type = colorz)+
+  scale_fill_discrete(type = colorz)+
+  theme_classic()+
+  theme(legend.position = "none",strip.background = element_blank(),
+        strip.text = element_blank())+
+  facet_grid(stream_off~zone,scales="free")+
+  labs(color="Stream",
+       x="Inferred Spawning Location of Parent (river meters)",
+       y = "Inferred Spawning Location\nof Offspring (river meters)")
+
+IU_separate_plot
+
+
+
+###ERB
+model_data_upstream_erb <- model_data %>% filter(intertidal_off=="Upstream",stream_off=="Erb")
+global_distance_upstream_erb<-lm(distance_mouth_off~distance_mouth_par +
+                               sex_off+DOY_off+length_off,
+                             data=model_data_upstream_erb,na.action=na.fail)
+
+distance_dredge_upstream_erb<-dredge(global_distance_upstream_erb)
+
+best_distance_upstream_erb <- lm(distance_mouth_off~distance_mouth_par +
+                                   DOY_off,
+                                 data=model_data_upstream_erb,na.action=na.fail)
+summary(best_distance_upstream_erb)
+
+model_data_intertidal_erb <- model_data %>% filter(intertidal_off=="Intertidal",stream_off=="Erb")
+global_distance_intertidal_erb<-lm(distance_mouth_off~distance_mouth_par +
+                                   sex_off+DOY_off+length_off,
+                                 data=model_data_intertidal_erb,na.action=na.fail)
+
+distance_dredge_intertidal_erb<-dredge(global_distance_intertidal_erb)
+
+best_distance_intertidal_erb <- lm(distance_mouth_off~distance_mouth_par +
+                                     DOY_off,
+                                   data=model_data_intertidal_erb,na.action=na.fail)
+summary(best_distance_intertidal_erb)
+
+
+distance_pred_upstream_erb<-as.data.frame(model_data_upstream_erb %>% group_by(stream_off) %>% 
+                                        dplyr::summarise(distance_mouth_par = seq(min(distance_mouth_par),max(distance_mouth_par),length.out=1000),
+                                                         DOY_off = mean(DOY_off),
+                                                         length_off = mean(length_off),
+                                                         sex_off = "Male", distance_mouth_off = NA,
+                                                         zone = "Upstream"))
+distance_pred_upstream_erb$distance_mouth_off <- predict(best_distance_upstream_erb,newdata = distance_pred_upstream_erb)
+distance_pred_upstream_erb$se.fit <- predict(best_distance_upstream_erb,newdata = distance_pred_upstream_erb,se.fit = T)$se.fit
+
+
+distance_pred_intertidal_erb<-as.data.frame(model_data_intertidal_erb %>% group_by(stream_off) %>% 
+                                          dplyr::summarise(distance_mouth_par = seq(min(distance_mouth_par),max(distance_mouth_par),length.out=1000),
+                                                           DOY_off = mean(DOY_off),
+                                                           length_off = mean(length_off),
+                                                           sex_off = "Male", distance_mouth_off = NA,
+                                                           zone = "Intertidal"))
+distance_pred_intertidal_erb$distance_mouth_off <- predict(best_distance_intertidal_erb,newdata = distance_pred_intertidal_erb)
+distance_pred_intertidal_erb$se.fit <- predict(best_distance_intertidal_erb,newdata = distance_pred_intertidal_erb,se.fit = T)$se.fit
+
+
+###Gilmour
+model_data_upstream_gilmour <- model_data %>% filter(intertidal_off=="Upstream",stream_off=="Gilmour")
+global_distance_upstream_gilmour<-lm(distance_mouth_off~distance_mouth_par +
+                                   sex_off+DOY_off+length_off,
+                                 data=model_data_upstream_gilmour,na.action=na.fail)
+
+distance_dredge_upstream_gilmour<-dredge(global_distance_upstream_gilmour)
+
+best_distance_upstream_gilmour <- lm(distance_mouth_off~distance_mouth_par,
+                                 data=model_data_upstream_gilmour,na.action=na.fail)
+summary(best_distance_upstream_gilmour)
+
+model_data_intertidal_gilmour <- model_data %>% filter(intertidal_off=="Intertidal",stream_off=="Gilmour")
+global_distance_intertidal_gilmour<-lm(distance_mouth_off~distance_mouth_par +
+                                     sex_off+DOY_off+length_off,
+                                   data=model_data_intertidal_gilmour,na.action=na.fail)
+
+distance_dredge_intertidal_gilmour<-dredge(global_distance_intertidal_gilmour)
+
+best_distance_intertidal_gilmour <- lm(distance_mouth_off~ 
+                                     DOY_off,
+                                   data=model_data_intertidal_gilmour,na.action=na.fail)
+summary(best_distance_intertidal_gilmour)
+
+distance_pred_upstream_gilmour<-as.data.frame(model_data_upstream_gilmour %>% group_by(stream_off) %>% 
+                                            dplyr::summarise(distance_mouth_par = seq(min(distance_mouth_par),max(distance_mouth_par),length.out=1000),
+                                                             DOY_off = mean(DOY_off),
+                                                             length_off = mean(length_off),
+                                                             sex_off = "Male", distance_mouth_off = NA,
+                                                             zone = "Upstream"))
+distance_pred_upstream_gilmour$distance_mouth_off <- predict(best_distance_upstream_gilmour,newdata = distance_pred_upstream_gilmour)
+distance_pred_upstream_gilmour$se.fit <- predict(best_distance_upstream_gilmour,newdata = distance_pred_upstream_gilmour,se.fit = T)$se.fit
+
+
+distance_pred_intertidal_gilmour<-as.data.frame(model_data_intertidal_gilmour %>% group_by(stream_off) %>% 
+                                              dplyr::summarise(distance_mouth_par = seq(min(distance_mouth_par),max(distance_mouth_par),length.out=1000),
+                                                               DOY_off = mean(DOY_off),
+                                                               length_off = mean(length_off),
+                                                               sex_off = "Male", distance_mouth_off = NA,
+                                                               zone = "Intertidal"))
+distance_pred_intertidal_gilmour$distance_mouth_off <- predict(best_distance_intertidal_gilmour,newdata = distance_pred_intertidal_gilmour)
+distance_pred_intertidal_gilmour$se.fit <- predict(best_distance_intertidal_gilmour,newdata = distance_pred_intertidal_gilmour,se.fit = T)$se.fit
+
+
+###Hogan
+model_data_upstream_hogan <- model_data %>% filter(intertidal_off=="Upstream",stream_off=="Hogan")
+global_distance_upstream_hogan<-lm(distance_mouth_off~distance_mouth_par +
+                                       sex_off+DOY_off+length_off,
+                                     data=model_data_upstream_hogan,na.action=na.fail)
+
+distance_dredge_upstream_hogan<-dredge(global_distance_upstream_hogan)
+
+best_distance_upstream_hogan <- lm(distance_mouth_off~distance_mouth_par +
+                                     length_off + sex_off,
+                                     data=model_data_upstream_hogan,na.action=na.fail)
+summary(best_distance_upstream_hogan)
+
+model_data_intertidal_hogan <- model_data %>% filter(intertidal_off=="Intertidal",stream_off=="Hogan")
+global_distance_intertidal_hogan<-lm(distance_mouth_off~distance_mouth_par +
+                                         sex_off+DOY_off+length_off,
+                                       data=model_data_intertidal_hogan,na.action=na.fail)
+
+distance_dredge_intertidal_hogan<-dredge(global_distance_intertidal_hogan)
+
+best_distance_intertidal_hogan <- lm(distance_mouth_off~ 
+                                         DOY_off + sex_off,
+                                       data=model_data_intertidal_hogan,na.action=na.fail)
+summary(best_distance_intertidal_hogan)
+
+distance_pred_upstream_hogan<-as.data.frame(model_data_upstream_hogan %>% group_by(stream_off) %>% 
+                                            dplyr::summarise(distance_mouth_par = seq(min(distance_mouth_par),max(distance_mouth_par),length.out=1000),
+                                                             DOY_off = mean(DOY_off),
+                                                             length_off = mean(length_off),
+                                                             sex_off = "Male", distance_mouth_off = NA,
+                                                             zone = "Upstream"))
+distance_pred_upstream_hogan$distance_mouth_off <- predict(best_distance_upstream_hogan,newdata = distance_pred_upstream_hogan)
+distance_pred_upstream_hogan$se.fit <- predict(best_distance_upstream_hogan,newdata = distance_pred_upstream_hogan,se.fit = T)$se.fit
+
+
+distance_pred_intertidal_hogan<-as.data.frame(model_data_intertidal_hogan %>% group_by(stream_off) %>% 
+                                              dplyr::summarise(distance_mouth_par = seq(min(distance_mouth_par),max(distance_mouth_par),length.out=1000),
+                                                               DOY_off = mean(DOY_off),
+                                                               length_off = mean(length_off),
+                                                               sex_off = "Male", distance_mouth_off = NA,
+                                                               zone = "Intertidal"))
+distance_pred_intertidal_hogan$distance_mouth_off <- predict(best_distance_intertidal_hogan,newdata = distance_pred_intertidal_hogan)
+distance_pred_intertidal_hogan$se.fit <- predict(best_distance_intertidal_hogan,newdata = distance_pred_intertidal_hogan,se.fit = T)$se.fit
+
+
+
+###Stockdale
+model_data_upstream_stockdale <- model_data %>% filter(intertidal_off=="Upstream",stream_off=="Stockdale")
+global_distance_upstream_stockdale<-lm(distance_mouth_off~distance_mouth_par +
+                                       sex_off+DOY_off+length_off,
+                                     data=model_data_upstream_stockdale,na.action=na.fail)
+
+distance_dredge_upstream_stockdale<-dredge(global_distance_upstream_stockdale)
+
+best_distance_upstream_stockdale <- lm(distance_mouth_off~distance_mouth_par+
+                                         length_off,
+                                     data=model_data_upstream_stockdale,na.action=na.fail)
+summary(best_distance_upstream_stockdale)
+
+model_data_intertidal_stockdale <- model_data %>% filter(intertidal_off=="Intertidal",stream_off=="Stockdale")
+global_distance_intertidal_stockdale<-lm(distance_mouth_off~distance_mouth_par +
+                                         sex_off+DOY_off+length_off,
+                                       data=model_data_intertidal_stockdale,na.action=na.fail)
+
+distance_dredge_intertidal_stockdale<-dredge(global_distance_intertidal_stockdale)
+
+best_distance_intertidal_stockdale <- lm(distance_mouth_off~ distance_mouth_par +
+                                         DOY_off,
+                                       data=model_data_intertidal_stockdale,na.action=na.fail)
+summary(best_distance_intertidal_stockdale)
+
+distance_pred_upstream_stockdale<-as.data.frame(model_data_upstream_stockdale %>% group_by(stream_off) %>% 
+                                            dplyr::summarise(distance_mouth_par = seq(min(distance_mouth_par),max(distance_mouth_par),length.out=1000),
+                                                             DOY_off = mean(DOY_off),
+                                                             length_off = mean(length_off),
+                                                             sex_off = "Male", distance_mouth_off = NA,
+                                                             zone = "Upstream"))
+distance_pred_upstream_stockdale$distance_mouth_off <- predict(best_distance_upstream_stockdale,newdata = distance_pred_upstream_stockdale)
+distance_pred_upstream_stockdale$se.fit <- predict(best_distance_upstream_stockdale,newdata = distance_pred_upstream_stockdale,se.fit = T)$se.fit
+
+
+distance_pred_intertidal_stockdale<-as.data.frame(model_data_intertidal_stockdale %>% group_by(stream_off) %>% 
+                                              dplyr::summarise(distance_mouth_par = seq(min(distance_mouth_par),max(distance_mouth_par),length.out=1000),
+                                                               DOY_off = mean(DOY_off),
+                                                               length_off = mean(length_off),
+                                                               sex_off = "Male", distance_mouth_off = NA,
+                                                               zone = "Intertidal"))
+distance_pred_intertidal_stockdale$distance_mouth_off <- predict(best_distance_intertidal_stockdale,newdata = distance_pred_intertidal_stockdale)
+distance_pred_intertidal_stockdale$se.fit <- predict(best_distance_intertidal_stockdale,newdata = distance_pred_intertidal_stockdale,se.fit = T)$se.fit
+
+
+
+distance_pred_IU_separate <- rbind(distance_pred_intertidal_erb, distance_pred_upstream_erb,
+      distance_pred_intertidal_gilmour, distance_pred_upstream_gilmour,
+      distance_pred_intertidal_hogan, distance_pred_upstream_hogan,
+      distance_pred_intertidal_stockdale, distance_pred_upstream_stockdale)
+
+distance_pred_IU_separate<-distance_pred_IU_separate %>% left_join(high_tide_line,by="stream_off")%>% 
+  filter((distance_mouth_par <= htide & zone == "Intertidal") | 
+           (distance_mouth_par > htide & zone == "Upstream"))
+
+
+IU_separate_plot<-distance_pred_IU_separate %>% 
+  ggplot(aes(y=distance_mouth_off,x=distance_mouth_par,color=stream_off))+
+  #geom_vline(data=high_tide_line,aes(xintercept=htide,color=stream_off),show.legend = F,lty=2,lwd=0.8)+
+  
+  #geom_segment(data=high_tide_line,aes(x=htide,y=-100,xend=htide,yend=-20,color=stream_off),
+  #             lwd=1.2,show.legend = F)+
+  #geom_segment(data=high_tide_line,aes(x=-175,xend=-20, y=htide,yend=htide,color=stream_off),
+  #             lwd=1.2,show.legend = F)+
+  #coord_cartesian(ylim = c(-20, 750),xlim=c(-100,1200), clip="on") +
+  
+  geom_jitter(data=model_data,aes(y=distance_mouth_off,x=distance_mouth_par,
+                                  color=stream_off),
+              pch=16,alpha = 0.3,width = 10,height=10,size=0.3)+
+  guides(colour = guide_legend(override.aes = list(alpha=1,size=2)))+
+  
+  geom_ribbon(aes(ymin=distance_mouth_off-1.96*se.fit,ymax=distance_mouth_off+1.96*se.fit,
+                  color = stream_off,fill=stream_off,
+                  group = zone),alpha=0.3,show.legend = F)+
+  geom_line(lwd=0.8,aes(color=stream_off,group = zone),show.legend = F)+
+  geom_abline(slope=1,intercept=0,lty=2,lwd=0.5)+
+  scale_color_discrete(type = colorz)+
+  scale_fill_discrete(type = colorz)+
+  theme_classic()+
+  theme(legend.position = "none",strip.background = element_blank(),
+        strip.text = element_blank())+
+  facet_grid(stream_off~zone,scales="free")+
+  labs(color="Stream",
+       x="Inferred Spawning Location of Parent (river meters)",
+       y = "Inferred Spawning Location\nof Offspring (river meters)")
+
+IU_separate_plot
+
+
+
+
+
+
+
+
+
+
+
+# Load necessary libraries
+library(MuMIn)
+library(tidyverse)
+library(ggplot2)
+
+# Function to run the model
+run_model <- function(data, intertidal_off_value, stream_off_value) {
+  data_filtered <- data %>% 
+    filter(intertidal_off == intertidal_off_value, stream_off == stream_off_value)
+  
+  global_model <- lm(distance_mouth_off ~ distance_mouth_par + sex_off + DOY_off + length_off,
+                     data = data_filtered, na.action = na.fail)
+  distance_dredge <- dredge(global_model)
+  
+  # Sort the models based on AICc using model.sel()
+  sorted_models <- model.sel(distance_dredge)
+  
+  # Get the best model
+  best_model <- get.models(sorted_models, subset = 1)[[1]]
+  best_model_formula <- formula(best_model)
+  
+  best_model <- lm(best_model_formula, data = data_filtered, na.action = na.fail)
+  
+  # Get the predictors in the best model
+  predictors <- all.vars(best_model_formula)[-1]
+  
+  prediction <- predict(best_model, newdata = data_filtered[predictors], se.fit = TRUE)
+  
+  return(data.frame(intertidal_off = intertidal_off_value,
+                    stream_off = stream_off_value,
+                    distance_mouth_par = ifelse("distance_mouth_par" %in% predictors, data_filtered$distance_mouth_par, NA),
+                    prediction = prediction$fit,
+                    se.fit = prediction$se.fit))
+}
+
+# Define the combinations of 'intertidal_off' and 'stream_off'
+conditions <- expand.grid(intertidal_off = c("Intertidal", "Upstream"),
+                          stream_off = unique(model_data$stream_off))
+
+# Run models for all combinations
+predictions <- map2_dfr(conditions$intertidal_off, conditions$stream_off, ~run_model(model_data, .x, .y))
+
+IU_separate_plot<-distance_pred_IU_separate %>% 
+  ggplot(aes(y=distance_mouth_off,x=distance_mouth_par,color=stream_off))+
+  #geom_vline(data=high_tide_line,aes(xintercept=htide,color=stream_off),show.legend = F,lty=2,lwd=0.8)+
+  
+  #geom_segment(data=high_tide_line,aes(x=htide,y=-100,xend=htide,yend=-20,color=stream_off),
+  #             lwd=1.2,show.legend = F)+
+  #geom_segment(data=high_tide_line,aes(x=-175,xend=-20, y=htide,yend=htide,color=stream_off),
+  #             lwd=1.2,show.legend = F)+
+  #coord_cartesian(ylim = c(-20, 750),xlim=c(-100,1200), clip="on") +
+  
+  geom_jitter(data=model_data,aes(y=distance_mouth_off,x=distance_mouth_par,
+                                  color=stream_off),
+              pch=16,alpha = 0.3,width = 10,height=10,size=0.3)+
+  guides(colour = guide_legend(override.aes = list(alpha=1,size=2)))+
+  
+  geom_ribbon(aes(ymin=distance_mouth_off-1.96*se.fit,ymax=distance_mouth_off+1.96*se.fit,
+                  color = stream_off,fill=stream_off,
+                  group = zone),alpha=0.3,show.legend = F)+
+  geom_line(lwd=0.8,aes(color=stream_off,group = zone),show.legend = F)+
+  geom_abline(slope=1,intercept=0,lty=2,lwd=0.5)+
+  scale_color_discrete(type = colorz)+
+  scale_fill_discrete(type = colorz)+
+  theme_classic()+
+  theme(legend.position = "none",strip.background = element_blank(),
+        strip.text = element_blank())+
+  facet_grid(stream_off~zone,scales="free")+
+  labs(color="Stream",
+       x="Inferred Spawning Location of Parent (river meters)",
+       y = "Inferred Spawning Location\nof Offspring (river meters)")
+
+IU_separate_plot
 
 
 
