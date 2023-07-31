@@ -1,0 +1,150 @@
+Response,Model,K,LL,AICc,deltaAIC,wAIC
+sire location (river meters),dam location + stream + dam location:stream,9,-4139.36,8297.00,0.00,0.81
+sire location (river meters),dam location + stream,6,-4143.86,8299.84,2.84,0.19
+sire location (river meters),stream,5,-4190.81,8391.71,94.71,0.00
+sire location (river meters),dam location,3,-4195.08,8396.20,99.20,0.00
+sire location (river meters),1,2,-4370.95,8745.91,448.91,0.00
+offspring location (river meters),parent location + DOY + length_off + sex + stream + parent location:stream,12,-35645.74,71315.53,0.00,0.40
+offspring location (river meters),parent location + DOY + sex + stream + parent location:stream,11,-35646.94,71315.93,0.40,0.33
+offspring location (river meters),parent location + DOY + length_off + sex + stream,9,-35649.69,71317.41,1.88,0.16
+offspring location (river meters),parent location + DOY + sex + stream,8,-35650.92,71317.87,2.34,0.12
+offspring location (river meters),parent location + DOY + length_off + stream + parent location:stream,11,-35658.07,71338.20,22.67,0.00
+offspring location (river meters),parent location + DOY + stream + parent location:stream,10,-35659.43,71338.90,23.37,0.00
+offspring location (river meters),parent location + DOY + length_off + stream,8,-35662.01,71340.05,24.52,0.00
+offspring location (river meters),parent location + DOY + stream,7,-35663.40,71340.82,25.29,0.00
+offspring location (river meters),parent location + sex + stream + parent location:stream,10,-35677.82,71375.68,60.15,0.00
+offspring location (river meters),parent location + length_off + sex + stream + parent location:stream,11,-35676.86,71375.77,60.24,0.00
+offspring location (river meters),parent location + length_off + sex + stream,8,-35680.88,71377.78,62.25,0.00
+offspring location (river meters),parent location + sex + stream,7,-35681.89,71377.80,62.27,0.00
+offspring location (river meters),parent location + length_off + stream + parent location:stream,10,-35691.16,71402.36,86.83,0.00
+offspring location (river meters),parent location + stream + parent location:stream,9,-35692.26,71402.56,87.03,0.00
+offspring location (river meters),parent location + length_off + stream,7,-35695.20,71404.41,88.88,0.00
+offspring location (river meters),parent location + stream,6,-35696.35,71404.72,89.19,0.00
+offspring location (river meters),DOY + length_off + sex + stream,8,-35775.43,71566.89,251.36,0.00
+offspring location (river meters),DOY + sex + stream,7,-35776.57,71567.16,251.63,0.00
+offspring location (river meters),DOY + length_off + stream,7,-35787.39,71588.79,273.26,0.00
+offspring location (river meters),DOY + stream,6,-35788.67,71589.35,273.82,0.00
+offspring location (river meters),sex + stream,6,-35806.96,71625.93,310.40,0.00
+offspring location (river meters),length_off + sex + stream,7,-35806.03,71626.09,310.56,0.00
+offspring location (river meters),length_off + stream,6,-35819.94,71651.89,336.36,0.00
+offspring location (river meters),stream,5,-35821.00,71652.01,336.48,0.00
+offspring location (river meters),parent location + DOY + sex,5,-35979.27,71968.56,653.03,0.00
+offspring location (river meters),parent location + DOY + length_off + sex,6,-35979.05,71970.11,654.58,0.00
+offspring location (river meters),parent location + DOY,4,-35986.82,71981.65,666.12,0.00
+offspring location (river meters),parent location + DOY + length_off,5,-35986.65,71983.31,667.78,0.00
+offspring location (river meters),parent location + sex,4,-36080.08,72168.16,852.63,0.00
+offspring location (river meters),parent location + length_off + sex,5,-36079.58,72169.17,853.64,0.00
+offspring location (river meters),parent location,3,-36089.59,72185.18,869.65,0.00
+offspring location (river meters),parent location + length_off,4,-36089.18,72186.36,870.83,0.00
+offspring location (river meters),DOY + length_off + sex,5,-36733.31,73476.63,2161.10,0.00
+offspring location (river meters),DOY + length_off,4,-36736.64,73481.29,2165.76,0.00
+offspring location (river meters),DOY + sex,4,-36739.53,73487.07,2171.54,0.00
+offspring location (river meters),DOY,3,-36742.65,73491.31,2175.78,0.00
+offspring location (river meters),length_off + sex,4,-36937.32,73882.65,2567.12,0.00
+offspring location (river meters),length_off,3,-36942.40,73890.81,2575.28,0.00
+offspring location (river meters),sex,3,-36946.28,73898.57,2583.04,0.00
+offspring location (river meters),1,2,-36951.07,73906.13,2590.60,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + parent environment + sex + stream + parent location:stream,11,-2319.37,4660.78,0.00,0.47
+Offspring environment (intertidal or upstream),parent location + DOY + parent environment + sex + stream + parent location:stream + parent environment:stream,14,-2317.06,4662.20,1.42,0.23
+Offspring environment (intertidal or upstream),parent location + DOY + parent environment + length_off + sex + stream + parent location:stream,12,-2319.23,4662.52,1.74,0.20
+Offspring environment (intertidal or upstream),parent location + DOY + parent environment + length_off + sex + stream + parent location:stream + parent environment:stream,15,-2316.93,4663.95,3.17,0.10
+Offspring environment (intertidal or upstream),parent location + parent environment + sex + stream + parent location:stream,10,-2325.97,4671.99,11.20,0.00
+Offspring environment (intertidal or upstream),parent location + parent environment + sex + stream + parent location:stream + parent environment:stream,13,-2323.44,4672.94,12.16,0.00
+Offspring environment (intertidal or upstream),parent location + parent environment + length_off + sex + stream + parent location:stream,11,-2325.85,4673.74,12.96,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + sex + stream + parent location:stream,10,-2327.11,4674.25,13.47,0.00
+Offspring environment (intertidal or upstream),parent location + parent environment + length_off + sex + stream + parent location:stream + parent environment:stream,14,-2323.32,4674.71,13.93,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + length_off + sex + stream + parent location:stream,11,-2326.95,4675.94,15.16,0.00
+Offspring environment (intertidal or upstream),parent location + sex + stream + parent location:stream,9,-2334.40,4686.84,26.06,0.00
+Offspring environment (intertidal or upstream),parent location + length_off + sex + stream + parent location:stream,10,-2334.26,4688.55,27.77,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + parent environment + sex + stream + parent environment:stream,11,-2336.77,4695.60,34.82,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + parent environment + length_off + sex + stream + parent environment:stream,12,-2336.71,4697.48,36.69,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + parent environment + stream + parent location:stream,10,-2341.57,4703.19,42.41,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + parent environment + stream + parent location:stream + parent environment:stream,13,-2339.15,4704.37,43.59,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + parent environment + length_off + stream + parent location:stream,11,-2341.33,4704.71,43.92,0.00
+Offspring environment (intertidal or upstream),parent location + parent environment + sex + stream + parent environment:stream,10,-2342.83,4705.71,44.93,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + parent environment + length_off + stream + parent location:stream + parent environment:stream,14,-2338.91,4705.90,45.12,0.00
+Offspring environment (intertidal or upstream),parent location + parent environment + length_off + sex + stream + parent environment:stream,11,-2342.78,4707.60,46.82,0.00
+Offspring environment (intertidal or upstream),DOY + parent environment + sex + stream + parent environment:stream,10,-2346.60,4713.23,52.45,0.00
+Offspring environment (intertidal or upstream),DOY + parent environment + length_off + sex + stream + parent environment:stream,11,-2346.54,4715.12,54.34,0.00
+Offspring environment (intertidal or upstream),parent location + parent environment + stream + parent location:stream,9,-2349.19,4716.42,55.64,0.00
+Offspring environment (intertidal or upstream),parent location + parent environment + stream + parent location:stream + parent environment:stream,12,-2346.54,4717.14,56.36,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + stream + parent location:stream,9,-2349.81,4717.66,56.88,0.00
+Offspring environment (intertidal or upstream),parent location + parent environment + length_off + stream + parent location:stream,10,-2348.95,4717.93,57.15,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + parent environment + sex + stream,8,-2351.02,4718.07,57.29,0.00
+Offspring environment (intertidal or upstream),parent location + parent environment + length_off + stream + parent location:stream + parent environment:stream,13,-2346.30,4718.68,57.89,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + length_off + stream + parent location:stream,10,-2349.53,4719.11,58.33,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + parent environment + length_off + sex + stream,9,-2350.99,4720.02,59.24,0.00
+Offspring environment (intertidal or upstream),parent environment + sex + stream + parent environment:stream,9,-2352.15,4722.34,61.56,0.00
+Offspring environment (intertidal or upstream),parent environment + length_off + sex + stream + parent environment:stream,10,-2352.10,4724.24,63.46,0.00
+Offspring environment (intertidal or upstream),parent location + parent environment + sex + stream,7,-2356.60,4727.22,66.44,0.00
+Offspring environment (intertidal or upstream),parent location + parent environment + length_off + sex + stream,8,-2356.58,4729.18,68.40,0.00
+Offspring environment (intertidal or upstream),parent location + stream + parent location:stream,8,-2358.19,4732.40,71.62,0.00
+Offspring environment (intertidal or upstream),parent location + length_off + stream + parent location:stream,9,-2357.91,4733.85,73.07,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + sex + stream,7,-2361.75,4737.52,76.74,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + parent environment + stream + parent environment:stream,10,-2359.07,4738.17,77.39,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + length_off + sex + stream,8,-2361.71,4739.44,78.66,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + parent environment + length_off + stream + parent environment:stream,11,-2358.93,4739.91,79.13,0.00
+Offspring environment (intertidal or upstream),DOY + parent environment + sex + stream,7,-2364.13,4742.27,81.49,0.00
+Offspring environment (intertidal or upstream),DOY + parent environment + length_off + sex + stream,8,-2364.10,4744.22,83.44,0.00
+Offspring environment (intertidal or upstream),parent location + sex + stream,6,-2367.81,4747.63,86.85,0.00
+Offspring environment (intertidal or upstream),parent location + length_off + sex + stream,7,-2367.77,4749.57,88.78,0.00
+Offspring environment (intertidal or upstream),parent location + parent environment + stream + parent environment:stream,9,-2366.10,4750.24,89.46,0.00
+Offspring environment (intertidal or upstream),parent environment + sex + stream,6,-2369.52,4751.06,90.28,0.00
+Offspring environment (intertidal or upstream),parent location + parent environment + length_off + stream + parent environment:stream,10,-2365.97,4751.99,91.21,0.00
+Offspring environment (intertidal or upstream),parent environment + length_off + sex + stream,7,-2369.50,4753.02,92.24,0.00
+Offspring environment (intertidal or upstream),DOY + parent environment + stream + parent environment:stream,9,-2368.24,4754.51,93.73,0.00
+Offspring environment (intertidal or upstream),DOY + parent environment + length_off + stream + parent environment:stream,10,-2368.11,4756.26,95.48,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + parent environment + stream,7,-2373.40,4760.82,100.03,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + parent environment + length_off + stream,8,-2373.32,4762.66,101.88,0.00
+Offspring environment (intertidal or upstream),parent environment + stream + parent environment:stream,8,-2374.73,4765.50,104.71,0.00
+Offspring environment (intertidal or upstream),parent environment + length_off + stream + parent environment:stream,9,-2374.61,4767.26,106.47,0.00
+Offspring environment (intertidal or upstream),parent location + parent environment + stream,6,-2379.95,4771.92,111.13,0.00
+Offspring environment (intertidal or upstream),parent location + parent environment + length_off + stream,7,-2379.87,4773.77,112.98,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + stream,6,-2384.58,4781.17,120.39,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + length_off + stream,7,-2384.48,4782.98,122.20,0.00
+Offspring environment (intertidal or upstream),DOY + parent environment + stream,6,-2385.92,4783.86,123.07,0.00
+Offspring environment (intertidal or upstream),DOY + parent environment + length_off + stream,7,-2385.84,4785.70,124.92,0.00
+Offspring environment (intertidal or upstream),parent location + stream,5,-2391.64,4793.28,132.50,0.00
+Offspring environment (intertidal or upstream),parent environment + stream,5,-2392.27,4794.54,133.76,0.00
+Offspring environment (intertidal or upstream),parent location + length_off + stream,6,-2391.54,4795.10,134.32,0.00
+Offspring environment (intertidal or upstream),parent environment + length_off + stream,6,-2392.19,4796.39,135.61,0.00
+Offspring environment (intertidal or upstream),DOY + sex + stream,6,-2418.16,4848.33,187.54,0.00
+Offspring environment (intertidal or upstream),DOY + length_off + sex + stream,7,-2418.08,4850.19,189.41,0.00
+Offspring environment (intertidal or upstream),sex + stream,5,-2424.70,4859.41,198.63,0.00
+Offspring environment (intertidal or upstream),length_off + sex + stream,6,-2424.64,4861.29,200.51,0.00
+Offspring environment (intertidal or upstream),DOY + stream,5,-2440.34,4890.69,229.90,0.00
+Offspring environment (intertidal or upstream),DOY + length_off + stream,6,-2440.19,4892.40,231.61,0.00
+Offspring environment (intertidal or upstream),stream,4,-2447.82,4903.64,242.86,0.00
+Offspring environment (intertidal or upstream),length_off + stream,5,-2447.67,4905.36,244.57,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + parent environment + sex,5,-2527.21,5064.42,403.64,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + parent environment + length_off + sex,6,-2527.15,5066.32,405.54,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + parent environment,4,-2542.75,5093.51,432.73,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + parent environment + length_off,5,-2542.73,5095.47,434.68,0.00
+Offspring environment (intertidal or upstream),DOY + parent environment + sex,4,-2552.48,5112.96,452.18,0.00
+Offspring environment (intertidal or upstream),DOY + parent environment + length_off + sex,5,-2552.11,5114.23,453.45,0.00
+Offspring environment (intertidal or upstream),parent location + parent environment + sex,4,-2555.60,5119.21,458.42,0.00
+Offspring environment (intertidal or upstream),parent location + parent environment + length_off + sex,5,-2555.47,5120.95,460.17,0.00
+Offspring environment (intertidal or upstream),DOY + parent environment,3,-2567.25,5140.51,479.73,0.00
+Offspring environment (intertidal or upstream),DOY + parent environment + length_off,4,-2566.97,5141.95,481.17,0.00
+Offspring environment (intertidal or upstream),parent location + parent environment,3,-2572.22,5150.45,489.67,0.00
+Offspring environment (intertidal or upstream),parent location + parent environment + length_off,4,-2572.15,5152.32,491.53,0.00
+Offspring environment (intertidal or upstream),parent environment + sex,3,-2588.60,5183.19,522.41,0.00
+Offspring environment (intertidal or upstream),parent environment + length_off + sex,4,-2587.92,5183.85,523.07,0.00
+Offspring environment (intertidal or upstream),parent environment,2,-2604.57,5213.14,552.36,0.00
+Offspring environment (intertidal or upstream),parent environment + length_off,3,-2604.04,5214.09,553.31,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + sex,4,-2621.66,5251.33,590.54,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + length_off + sex,5,-2621.65,5253.32,592.54,0.00
+Offspring environment (intertidal or upstream),parent location + DOY,3,-2636.69,5279.38,618.60,0.00
+Offspring environment (intertidal or upstream),parent location + DOY + length_off,4,-2636.66,5281.33,620.54,0.00
+Offspring environment (intertidal or upstream),parent location + sex,3,-2648.55,5303.10,642.31,0.00
+Offspring environment (intertidal or upstream),parent location + length_off + sex,4,-2648.54,5305.10,644.31,0.00
+Offspring environment (intertidal or upstream),parent location,2,-2664.53,5333.05,672.27,0.00
+Offspring environment (intertidal or upstream),parent location + length_off,3,-2664.52,5335.05,674.26,0.00
+Offspring environment (intertidal or upstream),DOY + sex,3,-2818.07,5642.14,981.36,0.00
+Offspring environment (intertidal or upstream),DOY + length_off + sex,4,-2817.20,5642.41,981.63,0.00
+Offspring environment (intertidal or upstream),DOY,2,-2829.93,5663.86,1003.08,0.00
+Offspring environment (intertidal or upstream),DOY + length_off,3,-2829.19,5664.39,1003.61,0.00
+Offspring environment (intertidal or upstream),length_off + sex,3,-2880.63,5767.27,1106.49,0.00
+Offspring environment (intertidal or upstream),sex,2,-2882.36,5768.73,1107.94,0.00
+Offspring environment (intertidal or upstream),length_off,2,-2893.81,5791.62,1130.84,0.00
+Offspring environment (intertidal or upstream),1,1,-2895.28,5792.56,1131.78,0.00

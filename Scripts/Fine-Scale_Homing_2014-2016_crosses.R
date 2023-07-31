@@ -49,7 +49,7 @@ dam_sire_boxplots <- model_data %>% mutate(mate_distance = distance_mouth_dam - 
   scale_color_discrete(type = colorz)+
   scale_y_continuous(breaks = c(-2000,-1500,-1000,-500,-100,100,500,1000,1500,2000)) + 
   theme_classic()+
-  labs(y = "Distance Between Mates (river meter)\n(Dam - Sire)", x = "Stream", color = "Stream", fill = "Stream")+
+  labs(y = "Distance Between Mates (m)\n(Dam - Sire)", x = "Stream", color = "Stream", fill = "Stream")+
   facet_grid(stream_off~.)+
   theme(axis.title.x = element_blank(),axis.text.x = element_blank(),
         axis.ticks.x = element_blank())
@@ -70,7 +70,7 @@ DS_AIC[,2:5]<-round(DS_AIC[,2:5],2)
 names(DS_AIC[1])<-"K"
 DS_AIC$Model<-rownames(DS_AIC)
 for(i in 1:nrow(DS_AIC)) DS_AIC$Model[i]<- as.character(formula(get.models(DS_distance_dredge,subset = T)[[i]]))[3]
-#write.csv(DS_AIC,"../Figures/Dam_Sire_AIC_table.csv")
+#write.csv(DS_AIC,"Dam_Sire_AIC_table.csv")
 
 DS_distance_best<-DS_distance_global
 summary(DS_distance_best)
@@ -105,7 +105,7 @@ DS_AIC[,2:5]<-round(DS_AIC[,2:5],2)
 names(DS_AIC[1])<-"K"
 DS_AIC$Model<-rownames(DS_AIC)
 for(i in 1:nrow(DS_AIC)) DS_AIC$Model[i]<- as.character(formula(get.models(DS_distance_dredge,subset = T)[[i]]))[3]
-#write.csv(DS_AIC,"../Figures/Dam_Sire_AIC_table.csv")
+write.csv(DS_AIC,"Dam_Sire_AIC_table.csv")
 
 DS_distance_best<-DS_distance_global
 summary(DS_distance_best)
@@ -148,7 +148,7 @@ dam_sire_boxplots <- model_data %>% mutate(mate_distance = distance_mouth_dam - 
   scale_color_discrete(type = colorz)+
   scale_y_continuous(breaks = c(-2000,-1500,-1000,-500,-100,100,500,1000,1500,2000)) + 
   theme_classic()+
-  labs(y = "Distance Between Mates (river meter)\n(Dam - Sire)", x = "Stream", color = "Stream", fill = "Stream")+
+  labs(y = "Distance Between Mates (m)\n(Dam - Sire)", x = "Stream", color = "Stream", fill = "Stream")+
   facet_grid(stream_off~.)+
   theme(axis.text.x = element_blank(),axis.title.x = element_blank(),
         axis.ticks.x = element_blank())
@@ -207,5 +207,40 @@ dam_sire_boxplots <- model_data %>% mutate(mate_distance = distance_mouth_dam - 
         axis.ticks.x = element_blank())
 
 
-ggpubr::ggarrange(dam_sire_boxplots,dam_sire_glm,nrow = 2,heights=c(1,1),align = "v")
+Fig2<-ggpubr::ggarrange(dam_sire_boxplots,dam_sire_glm,nrow = 2,heights=c(1,1),align = "v")
 
+ggsave(plot = Fig2,filename = "Figure2.png",units = "in",width = 5,height = 4,dpi = 300)
+
+
+#dam v. off; sire v off; parent mid-point v off.
+
+model_data %>%  group_by(stream_off) %>% summarize(dam_v_off = distance_mouth_dam-distance_mouth_off,
+                                                   sire_v_off = distance_mouth_sire-distance_mouth_off,
+                                                   mid_v_off = ((distance_mouth_dam + distance_mouth_sire)/2) - distance_mouth_off) %>% 
+  pivot_longer(cols = c("dam_v_off","sire_v_off","mid_v_off"),names_to = "comparison",values_to="distance") %>% 
+  ggplot(aes(x=comparison,y=distance,color=stream_off))+
+  geom_boxplot()+
+  facet_grid(stream_off~.,scales="free")
+  
+model_data %>%  group_by(stream_off) %>% summarize(dam_v_off = distance_mouth_dam-distance_mouth_off,
+                                                   sire_v_off = distance_mouth_sire-distance_mouth_off,
+                                                   mid_v_off = ((distance_mouth_dam + distance_mouth_sire)/2) - distance_mouth_off) %>% 
+  pivot_longer(cols = c("dam_v_off","sire_v_off","mid_v_off"),names_to = "comparison",values_to="distance") %>% 
+  group_by(stream_off,comparison) %>% summarize(mean = mean(distance), sd = sd(distance)) %>% 
+  mutate(mean_sd = paste(round(mean,2)," (+/- ",round(sd,2),")",sep = "")) %>% 
+  select(stream_off,comparison,mean_sd) %>% 
+  pivot_wider(names_from = "comparison",values_from = "mean_sd")
+
+model_data %>% summarize(dam_v_off = distance_mouth_dam-distance_mouth_off,
+                                                   sire_v_off = distance_mouth_sire-distance_mouth_off,
+                                                   mid_v_off = ((distance_mouth_dam + distance_mouth_sire)/2) - distance_mouth_off) %>% 
+  pivot_longer(cols = c("dam_v_off","sire_v_off","mid_v_off"),names_to = "comparison",values_to="distance") %>% 
+  group_by(comparison) %>% summarize(mean = mean(distance), sd = sd(distance)) %>% 
+  mutate(mean_sd = paste(round(mean,2)," (+/- ",round(sd,2),")",sep = "")) %>% 
+  select(comparison,mean_sd) %>% 
+  pivot_wider(names_from = "comparison",values_from = "mean_sd")
+
+
+
+
+  

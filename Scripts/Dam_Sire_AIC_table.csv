@@ -1,0 +1,150 @@
+Response,Model,K,LL,AICc,deltaAIC,wAIC
+sire location (river meters),distance_mouth_dam + stream_off + distance_mouth_dam:stream_off + 1,9,-4139.36,8297.00,0.00,0.81
+sire location (river meters),distance_mouth_dam + stream_off + 1,6,-4143.86,8299.84,2.84,0.19
+sire location (river meters),stream_off + 1,5,-4190.81,8391.71,94.71,0.00
+sire location (river meters),distance_mouth_dam + 1,3,-4195.08,8396.20,99.20,0.00
+sire location (river meters),1,2,-4370.95,8745.91,448.91,0.00
+offspring lcoation (river meters),distance_mouth_par + DOY_off + length_off + sex_off + stream_off + distance_mouth_par:stream_off + 1,12,-28684.87,57393.82,0.00,0.60
+offspring lcoation (river meters),distance_mouth_par + DOY_off + length_off + sex_off + stream_off + 1,9,-28689.03,57396.10,2.29,0.19
+offspring lcoation (river meters),distance_mouth_par + DOY_off + sex_off + stream_off + distance_mouth_par:stream_off + 1,11,-28687.17,57396.40,2.59,0.16
+offspring lcoation (river meters),distance_mouth_par + DOY_off + sex_off + stream_off + 1,8,-28691.47,57398.97,5.15,0.05
+offspring lcoation (river meters),distance_mouth_par + DOY_off + length_off + stream_off + distance_mouth_par:stream_off + 1,11,-28692.82,57407.69,13.88,0.00
+offspring lcoation (river meters),distance_mouth_par + DOY_off + length_off + stream_off + 1,8,-28696.91,57409.85,16.04,0.00
+offspring lcoation (river meters),distance_mouth_par + DOY_off + stream_off + distance_mouth_par:stream_off + 1,10,-28695.44,57410.93,17.11,0.00
+offspring lcoation (river meters),distance_mouth_par + DOY_off + stream_off + 1,7,-28699.67,57413.36,19.54,0.00
+offspring lcoation (river meters),distance_mouth_par + length_off + sex_off + stream_off + distance_mouth_par:stream_off + 1,11,-28714.32,57450.71,56.89,0.00
+offspring lcoation (river meters),distance_mouth_par + sex_off + stream_off + distance_mouth_par:stream_off + 1,10,-28715.98,57452.01,58.19,0.00
+offspring lcoation (river meters),distance_mouth_par + length_off + sex_off + stream_off + 1,8,-28718.66,57453.35,59.53,0.00
+offspring lcoation (river meters),distance_mouth_par + sex_off + stream_off + 1,7,-28720.46,57454.95,61.14,0.00
+offspring lcoation (river meters),distance_mouth_par + length_off + stream_off + distance_mouth_par:stream_off + 1,10,-28724.08,57468.22,74.40,0.00
+offspring lcoation (river meters),distance_mouth_par + stream_off + distance_mouth_par:stream_off + 1,9,-28726.02,57470.09,76.27,0.00
+offspring lcoation (river meters),distance_mouth_par + length_off + stream_off + 1,7,-28728.36,57470.75,76.94,0.00
+offspring lcoation (river meters),distance_mouth_par + stream_off + 1,6,-28730.46,57472.93,79.12,0.00
+offspring lcoation (river meters),DOY_off + length_off + sex_off + stream_off + 1,8,-28791.97,57599.97,206.15,0.00
+offspring lcoation (river meters),DOY_off + sex_off + stream_off + 1,7,-28794.32,57602.67,208.85,0.00
+offspring lcoation (river meters),DOY_off + length_off + stream_off + 1,7,-28799.40,57612.83,219.02,0.00
+offspring lcoation (river meters),DOY_off + stream_off + 1,6,-28802.06,57616.14,222.33,0.00
+offspring lcoation (river meters),length_off + sex_off + stream_off + 1,7,-28821.56,57657.15,263.34,0.00
+offspring lcoation (river meters),sex_off + stream_off + 1,6,-28823.30,57658.62,264.80,0.00
+offspring lcoation (river meters),length_off + stream_off + 1,6,-28830.78,57673.57,279.76,0.00
+offspring lcoation (river meters),stream_off + 1,5,-28832.79,57675.59,281.77,0.00
+offspring lcoation (river meters),distance_mouth_par + DOY_off + sex_off + 1,5,-28914.30,57838.62,444.81,0.00
+offspring lcoation (river meters),distance_mouth_par + DOY_off + length_off + sex_off + 1,6,-28914.25,57840.53,446.71,0.00
+offspring lcoation (river meters),distance_mouth_par + DOY_off + 1,4,-28920.50,57849.01,455.19,0.00
+offspring lcoation (river meters),distance_mouth_par + DOY_off + length_off + 1,5,-28920.40,57850.82,457.00,0.00
+offspring lcoation (river meters),distance_mouth_par + sex_off + 1,4,-28994.31,57996.62,602.81,0.00
+offspring lcoation (river meters),distance_mouth_par + length_off + sex_off + 1,5,-28994.30,57998.60,604.79,0.00
+offspring lcoation (river meters),distance_mouth_par + 1,3,-29002.44,58010.89,617.07,0.00
+offspring lcoation (river meters),distance_mouth_par + length_off + 1,4,-29002.44,58012.89,619.08,0.00
+offspring lcoation (river meters),DOY_off + length_off + sex_off + 1,5,-29409.75,58829.52,1435.70,0.00
+offspring lcoation (river meters),DOY_off + sex_off + 1,4,-29411.16,58830.32,1436.51,0.00
+offspring lcoation (river meters),DOY_off + length_off + 1,4,-29413.66,58835.34,1441.52,0.00
+offspring lcoation (river meters),DOY_off + 1,3,-29414.91,58835.83,1442.01,0.00
+offspring lcoation (river meters),length_off + sex_off + 1,4,-29559.67,59127.35,1733.54,0.00
+offspring lcoation (river meters),sex_off + 1,3,-29562.77,59131.54,1737.73,0.00
+offspring lcoation (river meters),length_off + 1,3,-29565.74,59137.48,1743.67,0.00
+offspring lcoation (river meters),1,2,-29568.56,59141.12,1747.30,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + intertidal_par + length_off + sex_off + stream_off + distance_mouth_par:stream_off + 1,12,-1859.37,3742.81,0.00,0.37
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + intertidal_par + length_off + sex_off + stream_off + distance_mouth_par:stream_off + intertidal_par:stream_off + 1,15,-1856.47,3743.05,0.24,0.33
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + intertidal_par + sex_off + stream_off + distance_mouth_par:stream_off + 1,11,-1861.80,3745.65,2.84,0.09
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + intertidal_par + sex_off + stream_off + distance_mouth_par:stream_off + intertidal_par:stream_off + 1,14,-1858.87,3745.84,3.03,0.08
+Offspring environment (intertidal or upstream),distance_mouth_par + intertidal_par + length_off + sex_off + stream_off + distance_mouth_par:stream_off + 1,11,-1862.29,3746.64,3.82,0.05
+Offspring environment (intertidal or upstream),distance_mouth_par + intertidal_par + length_off + sex_off + stream_off + distance_mouth_par:stream_off + intertidal_par:stream_off + 1,14,-1859.32,3746.73,3.92,0.05
+Offspring environment (intertidal or upstream),distance_mouth_par + intertidal_par + sex_off + stream_off + distance_mouth_par:stream_off + 1,10,-1864.54,3749.14,6.33,0.02
+Offspring environment (intertidal or upstream),distance_mouth_par + intertidal_par + sex_off + stream_off + distance_mouth_par:stream_off + intertidal_par:stream_off + 1,13,-1861.55,3749.19,6.37,0.02
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + intertidal_par + length_off + sex_off + stream_off + intertidal_par:stream_off + 1,12,-1864.42,3752.92,10.10,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + intertidal_par + sex_off + stream_off + intertidal_par:stream_off + 1,11,-1866.54,3755.14,12.32,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + intertidal_par + length_off + sex_off + stream_off + intertidal_par:stream_off + 1,11,-1867.09,3756.24,13.43,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + intertidal_par + sex_off + stream_off + intertidal_par:stream_off + 1,10,-1869.05,3758.15,15.33,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + length_off + sex_off + stream_off + distance_mouth_par:stream_off + 1,11,-1869.27,3760.60,17.78,0.00
+Offspring environment (intertidal or upstream),DOY_off + intertidal_par + length_off + sex_off + stream_off + intertidal_par:stream_off + 1,11,-1869.43,3760.93,18.12,0.00
+Offspring environment (intertidal or upstream),DOY_off + intertidal_par + sex_off + stream_off + intertidal_par:stream_off + 1,10,-1871.53,3763.11,20.30,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + sex_off + stream_off + distance_mouth_par:stream_off + 1,10,-1871.83,3763.71,20.89,0.00
+Offspring environment (intertidal or upstream),intertidal_par + length_off + sex_off + stream_off + intertidal_par:stream_off + 1,10,-1871.88,3763.82,21.00,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + length_off + sex_off + stream_off + distance_mouth_par:stream_off + 1,10,-1872.78,3765.62,22.80,0.00
+Offspring environment (intertidal or upstream),intertidal_par + sex_off + stream_off + intertidal_par:stream_off + 1,9,-1873.83,3765.70,22.89,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + sex_off + stream_off + distance_mouth_par:stream_off + 1,9,-1875.16,3768.36,25.54,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + intertidal_par + length_off + sex_off + stream_off + 1,9,-1878.20,3774.44,31.62,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + intertidal_par + sex_off + stream_off + 1,8,-1880.01,3776.06,33.24,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + intertidal_par + length_off + sex_off + stream_off + 1,8,-1880.28,3776.59,33.78,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + intertidal_par + length_off + stream_off + distance_mouth_par:stream_off + intertidal_par:stream_off + 1,14,-1874.57,3777.23,34.42,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + intertidal_par + length_off + stream_off + distance_mouth_par:stream_off + 1,11,-1877.70,3777.46,34.64,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + intertidal_par + sex_off + stream_off + 1,7,-1881.97,3777.96,35.15,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + intertidal_par + stream_off + distance_mouth_par:stream_off + intertidal_par:stream_off + 1,13,-1877.55,3781.19,38.37,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + intertidal_par + stream_off + distance_mouth_par:stream_off + 1,10,-1880.70,3781.46,38.64,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + intertidal_par + length_off + stream_off + distance_mouth_par:stream_off + intertidal_par:stream_off + 1,13,-1878.08,3782.24,39.42,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + intertidal_par + length_off + stream_off + distance_mouth_par:stream_off + 1,10,-1881.26,3782.58,39.77,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + intertidal_par + stream_off + distance_mouth_par:stream_off + intertidal_par:stream_off + 1,12,-1880.89,3785.85,43.04,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + intertidal_par + stream_off + distance_mouth_par:stream_off + 1,9,-1884.10,3786.24,43.43,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + intertidal_par + length_off + stream_off + intertidal_par:stream_off + 1,11,-1882.56,3787.19,44.37,0.00
+Offspring environment (intertidal or upstream),DOY_off + intertidal_par + length_off + sex_off + stream_off + 1,8,-1885.68,3787.39,44.58,0.00
+Offspring environment (intertidal or upstream),DOY_off + intertidal_par + sex_off + stream_off + 1,7,-1887.50,3789.02,46.21,0.00
+Offspring environment (intertidal or upstream),intertidal_par + length_off + sex_off + stream_off + 1,7,-1887.71,3789.45,46.64,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + intertidal_par + stream_off + intertidal_par:stream_off + 1,10,-1885.21,3790.46,47.65,0.00
+Offspring environment (intertidal or upstream),intertidal_par + sex_off + stream_off + 1,6,-1889.41,3790.85,48.03,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + intertidal_par + length_off + stream_off + intertidal_par:stream_off + 1,10,-1885.89,3791.82,49.01,0.00
+Offspring environment (intertidal or upstream),DOY_off + intertidal_par + length_off + stream_off + intertidal_par:stream_off + 1,10,-1887.09,3794.23,51.41,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + intertidal_par + stream_off + intertidal_par:stream_off + 1,9,-1888.36,3794.77,51.96,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + length_off + stream_off + distance_mouth_par:stream_off + 1,10,-1887.91,3795.88,53.07,0.00
+Offspring environment (intertidal or upstream),DOY_off + intertidal_par + stream_off + intertidal_par:stream_off + 1,9,-1889.71,3797.46,54.65,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + length_off + sex_off + stream_off + 1,8,-1890.80,3797.62,54.81,0.00
+Offspring environment (intertidal or upstream),intertidal_par + length_off + stream_off + intertidal_par:stream_off + 1,9,-1890.17,3798.39,55.57,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + sex_off + stream_off + 1,7,-1892.72,3799.46,56.65,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + stream_off + distance_mouth_par:stream_off + 1,9,-1891.07,3800.17,57.36,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + length_off + sex_off + stream_off + 1,7,-1893.22,3800.46,57.64,0.00
+Offspring environment (intertidal or upstream),intertidal_par + stream_off + intertidal_par:stream_off + 1,8,-1892.64,3801.31,58.50,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + sex_off + stream_off + 1,6,-1895.00,3802.01,59.20,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + length_off + stream_off + distance_mouth_par:stream_off + 1,9,-1892.14,3802.31,59.50,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + stream_off + distance_mouth_par:stream_off + 1,8,-1895.10,3806.24,63.42,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + intertidal_par + length_off + stream_off + 1,8,-1896.75,3809.53,66.71,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + intertidal_par + stream_off + 1,7,-1899.03,3812.09,69.28,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + intertidal_par + length_off + stream_off + 1,7,-1899.42,3812.86,70.04,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + intertidal_par + stream_off + 1,6,-1901.57,3815.17,72.35,0.00
+Offspring environment (intertidal or upstream),DOY_off + intertidal_par + length_off + stream_off + 1,7,-1903.79,3821.61,78.80,0.00
+Offspring environment (intertidal or upstream),DOY_off + intertidal_par + stream_off + 1,6,-1906.10,3824.21,81.40,0.00
+Offspring environment (intertidal or upstream),intertidal_par + length_off + stream_off + 1,6,-1906.41,3824.85,82.03,0.00
+Offspring environment (intertidal or upstream),intertidal_par + stream_off + 1,5,-1908.59,3827.20,84.38,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + length_off + stream_off + 1,7,-1909.53,3833.09,90.28,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + stream_off + 1,6,-1911.93,3835.89,93.07,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + length_off + stream_off + 1,6,-1912.56,3837.14,94.32,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + stream_off + 1,5,-1914.81,3839.64,96.82,0.00
+Offspring environment (intertidal or upstream),DOY_off + length_off + sex_off + stream_off + 1,7,-1938.31,3890.64,147.83,0.00
+Offspring environment (intertidal or upstream),DOY_off + sex_off + stream_off + 1,6,-1940.43,3892.88,150.07,0.00
+Offspring environment (intertidal or upstream),length_off + sex_off + stream_off + 1,6,-1941.20,3894.42,151.60,0.00
+Offspring environment (intertidal or upstream),sex_off + stream_off + 1,5,-1943.17,3896.36,153.55,0.00
+Offspring environment (intertidal or upstream),DOY_off + length_off + stream_off + 1,6,-1956.01,3924.04,181.22,0.00
+Offspring environment (intertidal or upstream),DOY_off + stream_off + 1,5,-1958.66,3927.34,184.53,0.00
+Offspring environment (intertidal or upstream),length_off + stream_off + 1,5,-1959.49,3928.99,186.17,0.00
+Offspring environment (intertidal or upstream),stream_off + 1,4,-1961.99,3931.98,189.17,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + intertidal_par + length_off + sex_off + 1,6,-1983.97,3979.97,237.15,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + intertidal_par + sex_off + 1,5,-1985.22,3980.45,237.64,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + intertidal_par + length_off + 1,5,-1998.00,4006.00,263.19,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + intertidal_par + 1,4,-1999.49,4006.99,264.18,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + intertidal_par + sex_off + 1,4,-1999.52,4007.05,264.23,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + intertidal_par + length_off + sex_off + 1,5,-1998.59,4007.19,264.38,0.00
+Offspring environment (intertidal or upstream),DOY_off + intertidal_par + sex_off + 1,4,-2012.92,4033.84,291.03,0.00
+Offspring environment (intertidal or upstream),DOY_off + intertidal_par + length_off + sex_off + 1,5,-2012.35,4034.70,291.89,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + intertidal_par + length_off + 1,4,-2013.59,4035.19,292.38,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + intertidal_par + 1,3,-2014.78,4035.56,292.74,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + length_off + sex_off + 1,5,-2014.86,4039.74,296.93,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + sex_off + 1,4,-2016.57,4041.15,298.33,0.00
+Offspring environment (intertidal or upstream),DOY_off + intertidal_par + 1,3,-2026.78,4059.56,316.75,0.00
+Offspring environment (intertidal or upstream),DOY_off + intertidal_par + length_off + 1,4,-2026.03,4060.08,317.26,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + length_off + sex_off + 1,4,-2027.89,4063.80,320.98,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + sex_off + 1,3,-2029.24,4064.49,321.68,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + length_off + 1,4,-2028.46,4064.93,322.11,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + DOY_off + 1,3,-2030.45,4066.90,324.08,0.00
+Offspring environment (intertidal or upstream),intertidal_par + sex_off + 1,3,-2033.22,4072.45,329.63,0.00
+Offspring environment (intertidal or upstream),intertidal_par + length_off + sex_off + 1,4,-2032.95,4073.91,331.10,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + length_off + 1,3,-2042.33,4090.66,347.84,0.00
+Offspring environment (intertidal or upstream),distance_mouth_par + 1,2,-2043.97,4091.93,349.12,0.00
+Offspring environment (intertidal or upstream),intertidal_par + 1,2,-2048.35,4100.71,357.89,0.00
+Offspring environment (intertidal or upstream),intertidal_par + length_off + 1,3,-2047.95,4101.90,359.09,0.00
+Offspring environment (intertidal or upstream),DOY_off + sex_off + 1,3,-2157.26,4320.53,577.71,0.00
+Offspring environment (intertidal or upstream),DOY_off + length_off + sex_off + 1,4,-2156.87,4321.76,578.94,0.00
+Offspring environment (intertidal or upstream),DOY_off + 1,2,-2169.19,4342.38,599.56,0.00
+Offspring environment (intertidal or upstream),DOY_off + length_off + 1,3,-2168.67,4343.35,600.54,0.00
+Offspring environment (intertidal or upstream),sex_off + 1,2,-2189.07,4382.14,639.33,0.00
+Offspring environment (intertidal or upstream),length_off + sex_off + 1,3,-2189.00,4384.00,641.18,0.00
+Offspring environment (intertidal or upstream),1,1,-2202.20,4406.40,663.59,0.00
+Offspring environment (intertidal or upstream),length_off + 1,2,-2202.05,4408.10,665.29,0.00
